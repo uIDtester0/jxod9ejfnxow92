@@ -1,4 +1,3 @@
-# utils.py
 from PIL import Image, ImageDraw, ImageOps
 import io
 import zipfile
@@ -67,7 +66,7 @@ def process_image(image_bytes, selected_resource, filename=None):
         
     except Exception as e:
         logging.error(f"Ошибка обработки изображения: {e}")
-        return b''
+        return None
 
 def process_shield(front_bytes, back_bytes, template_path):
     """Обработка щита с валидацией данных"""
@@ -98,7 +97,7 @@ def process_shield(front_bytes, back_bytes, template_path):
         
     except Exception as e:
         logging.error(f"Ошибка обработки щита: {e}")
-        return b''
+        return None
 
 def process_painting(images_bytes, template_path, colors):
     """Обработка картины с валидацией данных"""
@@ -132,7 +131,7 @@ def process_painting(images_bytes, template_path, colors):
         
     except Exception as e:
         logging.error(f"Ошибка обработки картины: {e}")
-        return b''
+        return None
 
 def find_rectangle(image, target_color):
     """Поиск прямоугольной области по цвету"""
@@ -157,7 +156,7 @@ def find_rectangle(image, target_color):
         logging.error(f"Ошибка поиска прямоугольника: {e}")
         return None
 
-def create_resource_pack(image_data, pack_name, resource_type, filenames=None):
+def create_resource_pack(image_data, pack_name, resource_type):
     """Создание ресурспака с расширенной валидацией"""
     temp_dir = "temp_resourcepack"
     try:
@@ -195,7 +194,7 @@ def create_resource_pack(image_data, pack_name, resource_type, filenames=None):
             if not image_data:
                 raise ValueError("Пустые данные для изображения painting")
             
-            path = os.path.join(textures_dir, "painting", "kz.png")
+            path = os.path.join(textures_dir, "painting", f"kz.png")
             with open(path, "wb") as f:
                 f.write(image_data)
             logging.info(f"Создан файл: {path} ({len(image_data)} байт)")
