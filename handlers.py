@@ -1,3 +1,4 @@
+# handlers.py
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery, BufferedInputFile
 from aiogram.filters import Command
@@ -53,6 +54,13 @@ async def process_painting_queue():
     while True:
         task = await painting_queue.get()
         chat_id = task['chat_id']
+        
+        # Проверяем, активен ли процесс пользователя
+        if not user_data.get(chat_id, {}).get("in_process", False):
+            logging.info(f"Задача для chat_id {chat_id} отменена, пропускаем.")
+            painting_queue.task_done()
+            continue
+        
         try:
             async with painting_semaphore:
                 await task['message'].answer("🔄 Ваш запрос на обработку Painting начал выполняться. Пожалуйста, подождите...")
@@ -126,8 +134,8 @@ _(К сожалению, я не солнцеед)_
 async def cancel(message: Message, state: FSMContext):
     chat_id = message.chat.id
     init_user_data(chat_id)
-    await message.answer("Операция отменена")
     await state.clear()
+    await message.answer("Операция отменена")
 
 @router.callback_query(Form.selected_resource)
 async def select_resource(call: CallbackQuery, state: FSMContext):
