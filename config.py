@@ -1,7 +1,7 @@
 # config.py
 
 # Токен вашего бота
-BOT_TOKEN = "7931680506:AAEdAcH8aV3h82XLnNRvhRDXUQ4hSNs3HoQ"  # Замените на ваш токен
+BOT_TOKEN = "7931680506:AAG7YZBWns6xRwTmFe8hNsU6ZkkLOWocSzg"  # Замените на ваш токен
 
 # Путь к локальному файлу с шаблоном щита
 TEMPLATE_SHIELD_PATH = "shield_template.png"  # Убедитесь, что файл существует
