@@ -236,16 +236,14 @@ def create_resource_pack(image_data, pack_name, resource_type):
         manifest = {
             "format_version": 1,
             "header": {
-                "description": "TELEGRAM:
-https://t.me/hentai_mcpack_bot",
+                "description": "TELEGRAM: https://t.me/hentai_mcpack_bot",
                 "name": pack_name[:64],
                 "uuid": str(uuid.uuid4()),
                 "version": [6, 6, 6],
                 "min_engine_version": [1, 2, 6]
             },
             "modules": [{
-                "description": "TELEGRAM:
-https://t.me/hentai_mcpack_bot",
+                "description": "TELEGRAM: https://t.me/hentai_mcpack_bot",
                 "type": "resources",
                 "uuid": str(uuid.uuid4()),
                 "version": [6, 6, 6]
